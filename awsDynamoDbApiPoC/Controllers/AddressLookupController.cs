@@ -25,5 +25,27 @@ namespace awsDynamoDbApiPoC.Controllers
             return addressInfo;
         }
 
+        [HttpPost]
+        [Route("{countryIso3}/{postalCode}")]
+        public async Task<ActionResult> SaveAddressLookup(int postalCode, string countryIso3,
+           [FromBody] Dictionary<string, string> address)
+        {
+            var addressLookup = new AddressLookup
+            {
+                PostalCode = postalCode,
+                CountryIso3 = countryIso3,
+                Address = address
+            };
+            var result = await _addressService.SaveAddressLookup(addressLookup);
+            if (result)
+                return CreatedAtAction(nameof(GetAddressLookup), 
+                    new {postalCode, countryIso3}, 
+                    addressLookup);
+            else
+                return BadRequest();
+        }
+        
+        
+
     }
 }

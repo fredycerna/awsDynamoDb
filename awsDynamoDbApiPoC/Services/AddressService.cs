@@ -1,4 +1,5 @@
 ﻿using System;
+using awsDynamoDbApiPoC.extensions;
 using awsDynamoDbApiPoC.Repositories;
 using awsDynamoDbApiPoC.Repositories.Models;
 
@@ -17,6 +18,14 @@ namespace awsDynamoDbApiPoC.Services
 		{
 			return  await _addressRepository.GetAddressLookup(postalCode, countryIso3);
 		}
+
+		public async Task<bool> SaveAddressLookup(AddressLookup address)
+		{
+			address.Expires = DateTime.Now.AddDays(15).ToEpoch();
+			return await _addressRepository.SaveAddressLookup(address);
+		}
+		
+		
 	}
 }
 
