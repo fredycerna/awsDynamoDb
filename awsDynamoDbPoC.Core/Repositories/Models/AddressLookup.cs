@@ -1,6 +1,6 @@
 using Amazon.DynamoDBv2.DataModel;
 
-namespace awsDynamoDbApiPoC.Repositories.Models;
+namespace awsDynamoDbPoC.Core.Repositories.Models;
 
 [DynamoDBTable("address-service-lookup")]
 public class AddressLookup
@@ -22,3 +22,4 @@ public class AddressLookup
     public long Expires { get; set; }
     
 }
+

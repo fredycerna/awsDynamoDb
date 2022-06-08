@@ -1,4 +1,4 @@
-namespace awsDynamoDbApiPoC.extensions;
+namespace awsDynamoDbPoC.Core.Extensions;
 
 public static class DateTimeExtensions
 {

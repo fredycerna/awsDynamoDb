@@ -1,8 +1,8 @@
-using awsDynamoDbApiPoC.Repositories.Models;
-using awsDynamoDbApiPoC.Services;
+using awsDynamoDbPoC.Core.Repositories.Models;
+using awsDynamoDbPoC.Core.Services;
 using Microsoft.AspNetCore.Mvc;
 
-namespace awsDynamoDbApiPoC.Controllers
+namespace awsDynamoDbPoC.Web.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -28,7 +28,7 @@ namespace awsDynamoDbApiPoC.Controllers
         [HttpPost]
         [Route("{countryIso3}/{postalCode}")]
         public async Task<ActionResult> SaveAddressLookup(int postalCode, string countryIso3,
-           [FromBody] Dictionary<string, string> address)
+            [FromBody] Dictionary<string, string> address)
         {
             var addressLookup = new AddressLookup
             {
@@ -44,8 +44,5 @@ namespace awsDynamoDbApiPoC.Controllers
             else
                 return BadRequest();
         }
-        
-        
-
     }
 }
