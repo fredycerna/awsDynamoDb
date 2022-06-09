@@ -19,5 +19,8 @@
     <ItemGroup>
       <ProjectReference Include="..\awsDynamoDbPoC.Core\awsDynamoDbPoC.Core.csproj" />
     </ItemGroup>
+    <ItemGroup>
+        <InternalsVisibleTo Include="awsDynamoDbPoC.Tests" />
+    </ItemGroup>
 
 </Project>
