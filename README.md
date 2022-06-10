@@ -22,14 +22,10 @@ The credentials and AWS region could be set in the Program.cs in the awsDynamoDb
 
 ## Integration Tests
 The integration test created is using a in memory AWS DynamoDB using a docker image [amazon/dynamodb-local](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DynamoDBLocal.DownloadingAndRunning.html)  with [Docker.DotNet](https://github.com/dotnet/Docker.DotNet). 
-If your are using Windows instead of Linux or Mac please, in the **`TestContext`**  change the docker Uri
+
 ```c#
-    //for Linux or Mac
- private string dockerUri = "unix:///var/run/docker.sock";
-```
-```c#
-    //Windows
-private string dockerUri = "npipe://./pipe/docker_engine";
+    private readonly Uri _defaultWindowsDockerEngineUri = new Uri("unix:///var/run/docker.sock");
+    private readonly Uri _defaultLinuxDockerEngineUri = new Uri("unix:///var/run/docker.sock");
 ```
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)
