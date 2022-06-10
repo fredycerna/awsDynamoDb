@@ -1,3 +1,4 @@
+using System.Runtime.InteropServices;
 using Docker.DotNet;
 using Docker.DotNet.Models;
 
@@ -8,14 +9,14 @@ public class TestContext : IAsyncLifetime
     private readonly DockerClient _dockerClient;
     private const string ContainerImageUri = "amazon/dynamodb-local";
     private string _containerId = string.Empty;
-    private string dockerUri = "unix:///var/run/docker.sock";
-   // private string dockerUri = "npipe://./pipe/docker_engine";
-    
+    private readonly Uri _defaultWindowsDockerEngineUri = new Uri("unix:///var/run/docker.sock");
+    private readonly Uri _defaultLinuxDockerEngineUri = new Uri("unix:///var/run/docker.sock");
+
     public TestContext()
     {
-        _dockerClient = new DockerClientConfiguration(
-            new Uri(dockerUri)
-            ).CreateClient();
+        _dockerClient = RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? 
+            new DockerClientConfiguration(_defaultWindowsDockerEngineUri).CreateClient() : 
+            new DockerClientConfiguration(_defaultLinuxDockerEngineUri).CreateClient();
     }
     
     public async Task InitializeAsync()
