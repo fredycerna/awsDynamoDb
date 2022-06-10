@@ -9,7 +9,7 @@ public class TestContext : IAsyncLifetime
     private readonly DockerClient _dockerClient;
     private const string ContainerImageUri = "amazon/dynamodb-local";
     private string _containerId = string.Empty;
-    private readonly Uri _defaultWindowsDockerEngineUri = new Uri("unix:///var/run/docker.sock");
+    private readonly Uri _defaultWindowsDockerEngineUri = new Uri("npipe://./pipe/docker_engine");
     private readonly Uri _defaultLinuxDockerEngineUri = new Uri("unix:///var/run/docker.sock");
 
     public TestContext()
